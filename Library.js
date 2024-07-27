@@ -24,7 +24,7 @@ function Book(title,author,pages,hRead){
     }};
 
 function addBooktoLibrary(Book){
-    newBook = Book
+    let newBook = Book
     console.log(newBook)
     Library.push(newBook)
 }
@@ -72,10 +72,13 @@ NEWBOOK.addEventListener("close", ()=>{
 
     }
 });
-confirmBtn.addEventListener("click", (NBAuthor,NBPages,NBTitle,NBhRead)=>{
+confirmBtn.addEventListener("click", (e)=>{
     e.preventDefault()
-    FormedBook = Book(NBTitle,NBAuthor,NBPages)
+    FormedBook = new Book(NBTitle.value,NBAuthor.value,NBPages.value, false)
     addBooktoLibrary(FormedBook)
     displayLibrary(Library)
-    console.log(NBAuthor,NBPages,NBTitle,NBhRead)
+    console.log(NBAuthor.value)
+    console.log(NBPages.value)
+    console.log(NBTitle.value)
 });
+
