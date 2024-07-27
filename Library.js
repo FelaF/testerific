@@ -65,13 +65,17 @@ DialogButton.addEventListener("click", ()=>{
     NEWBOOK.showModal()
 });
 
-NEWBOOK.addEventListener("close", (e)=>{
+NEWBOOK.addEventListener("close", ()=>{
     if (NEWBOOK.returnValue != "default"){
         console.log(NEWBOOK.returnValue)
         TableBook = document.createElement("td")
 
     }
 });
-confirmBtn.addEventListener("click", (evet)=>{
-    console.log(NBAuthor.value, NBPages.value,NBTitle.value,NBhRead.value)
+confirmBtn.addEventListener("click", (NBAuthor,NBPages,NBTitle,NBhRead)=>{
+    e.preventDefault()
+    FormedBook = Book(NBTitle,NBAuthor,NBPages)
+    addBooktoLibrary(FormedBook)
+    displayLibrary(Library)
+    console.log(NBAuthor,NBPages,NBTitle,NBhRead)
 });
