@@ -25,18 +25,16 @@ function Book(title,author,pages,hRead){
 
 function addBooktoLibrary(Book){
     let newBook = Book
-    console.log(newBook)
     Library.push(newBook)
 }
 function displayLibrary(Library){
+    TempLibr = Library.map((i) => i.title)
+    console.log(TempLibr)
     for(let i= 0; i < Library.length; i++){
-        console.log(Library[i].info())
-    }
-}
+        console.log(Library[i].title)
+    }};
 
 const TheLightningThief = new Book("The Lightning Thief","Rick Riordan", 400, true)
-
-console.log(TheLightningThief.info())
 
 const TheCatintheHat = new Book("The Cat in the Hat", "Dr.Suess", 50, false)
 const Fahrenheit451 = new Book("Fahrenheit 451", "Ray Bradbury", 176, false)
@@ -44,9 +42,6 @@ const LordoftheFiles = new Book("Lord of the Flies", "William Golding", 336, tru
 const MobyDick = new Book("Moby Dick", "Herman Melville", 632, false)
 const TheOddessy = new Book("The Oddessy", "Homer", 416, false)
 
-console.log(Object.getPrototypeOf(TheCatintheHat) === Book.prototype)
-console.log(Object.getPrototypeOf(TheLightningThief) === Book.prototype)
-console.log(TheCatintheHat.valueOf())
 
 
 console.log(Library)
@@ -59,6 +54,7 @@ addBooktoLibrary(MobyDick)
 addBooktoLibrary(TheOddessy)
 displayLibrary(Library)
 
+console.log(Library)
 
 DialogButton.addEventListener("click", ()=>{
     NEWBOOK.showModal()
@@ -82,8 +78,8 @@ confirmBtn.addEventListener("click", (e)=>{
     else if (HREAD == 'no'){
         FormedBook = new Book(NBTitle.value,NBAuthor.value,NBPages.value, false)
     }
-    addBooktoLibrary(FormedBook)
-    displayLibrary(Library)
+    /* Lines 84 - 95 check if a book has already been added to librarys*/
+    
 });
 
 
