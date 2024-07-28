@@ -24,16 +24,18 @@ function Book(title,author,pages,hRead){
     }};
 
 function addBooktoLibrary(Book){
-    let newBook = Book
-    Library.push(newBook)
-}
+    TempLibr = Library.map((i) => i.title)
+    if (TempLibr.includes(Book.title)){
+    }
+    else {
+        Library.push(Book)
+    };
+
+};
 function displayLibrary(Library){
     TempLibr = Library.map((i) => i.title)
     console.log(TempLibr)
-    for(let i= 0; i < Library.length; i++){
-        console.log(Library[i].title)
-    }};
-
+}
 const TheLightningThief = new Book("The Lightning Thief","Rick Riordan", 400, true)
 
 const TheCatintheHat = new Book("The Cat in the Hat", "Dr.Suess", 50, false)
@@ -78,8 +80,17 @@ confirmBtn.addEventListener("click", (e)=>{
     else if (HREAD == 'no'){
         FormedBook = new Book(NBTitle.value,NBAuthor.value,NBPages.value, false)
     }
-    /* Lines 84 - 95 check if a book has already been added to librarys*/
+    addBooktoLibrary(FormedBook)
     
 });
 
+function displayTable(Library){
+    for(i = 0; i < Library.length ; i++){
+        let TableData = document.createElement("td")
+        TableData.innerHTML = Library[i].title
+        TableRow = document.createElement("tr")
+        NewBookTable.appendChild(TableData)
+    }
+}
 
+displayTable(Library)
