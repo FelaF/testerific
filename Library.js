@@ -87,13 +87,19 @@ confirmBtn.addEventListener("click", (e)=>{
 function createTable(Library){
     for(i = 0; i < Library.length ; i++){
         TR = document.createElement("tr")
-        TR.innerHTML = `<td>${Library[i].info()} </td>`
+        TR.setAttribute("id", i)
+        TR.innerHTML = `<td>${Library[i].title}</td> <td>${Library[i].author}</td> <td>${Library[i].pages}</td>`
+        BookButton = document.createElement("button")
+        BookButton.setAttribute("class", i)
+        BookButton.style.height = '60px';
+        BookButton.style.width = '60px';
+        BookButton.textContent = "Delete Book"
         BookTable.appendChild(TR)
+        BookTable.appendChild(BookButton)
+
     }
     body.appendChild(BookTable)
 };
 BookTable.setAttribute("id","Books")
 createTable(Library)
-function updateTable(Library){
-    
-}
+
