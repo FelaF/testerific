@@ -3,7 +3,7 @@ let NEWBOOK = document.getElementById("NBDialog")
 let NewBookTable = document.getElementById("NewBookCatalog2")
 let NewBookDiv = document.getElementById("NewBookCatalog")
 let confirmBtn = NEWBOOK.querySelector("#Confirm")
-let NBhRead = NEWBOOK.querySelector("#read")
+let NBhRead = document.getElementsByName("read")
 let NBTitle = NEWBOOK.querySelector("#Title")
 let NBPages = NEWBOOK.querySelector("#Pages")
 let NBAuthor = NEWBOOK.querySelector("#Author")
@@ -33,7 +33,6 @@ function displayLibrary(Library){
         console.log(Library[i].info())
     }
 }
-
 
 const TheLightningThief = new Book("The Lightning Thief","Rick Riordan", 400, true)
 
@@ -65,20 +64,26 @@ DialogButton.addEventListener("click", ()=>{
     NEWBOOK.showModal()
 });
 
-NEWBOOK.addEventListener("close", ()=>{
-    if (NEWBOOK.returnValue != "default"){
-        console.log(NEWBOOK.returnValue)
-        TableBook = document.createElement("td")
-
-    }
-});
 confirmBtn.addEventListener("click", (e)=>{
+    let HREAD;
+    let FormedBook;
     e.preventDefault()
-    FormedBook = new Book(NBTitle.value,NBAuthor.value,NBPages.value, false)
-    addBooktoLibrary(FormedBook)
-    displayLibrary(Library)
     console.log(NBAuthor.value)
     console.log(NBPages.value)
     console.log(NBTitle.value)
+    for (i = 0; i < NBhRead.length; i++) {
+        if (NBhRead[i].type == 'radio' && NBhRead[i].checked) {
+            HREAD = NBhRead[i].value
+        }
+    }
+    if (HREAD == 'yes'){
+        FormedBook = new Book(NBTitle.value,NBAuthor.value,NBPages.value, true)
+    }
+    else if (HREAD == 'no'){
+        FormedBook = new Book(NBTitle.value,NBAuthor.value,NBPages.value, false)
+    }
+    addBooktoLibrary(FormedBook)
+    displayLibrary(Library)
 });
+
 
