@@ -1,7 +1,7 @@
 let DialogButton = document.getElementById("showDialog")
 let NEWBOOK = document.getElementById("NBDialog")
-let NewBookTable = document.getElementById("NewBookCatalog2")
-let NewBookDiv = document.getElementById("NewBookCatalog")
+let body = document.body
+let BookTable = document.createElement("table")
 let confirmBtn = NEWBOOK.querySelector("#Confirm")
 let NBhRead = document.getElementsByName("read")
 let NBTitle = NEWBOOK.querySelector("#Title")
@@ -84,13 +84,16 @@ confirmBtn.addEventListener("click", (e)=>{
     
 });
 
-function displayTable(Library){
+function createTable(Library){
     for(i = 0; i < Library.length ; i++){
-        let TableData = document.createElement("td")
-        TableData.innerHTML = Library[i].title
-        TableRow = document.createElement("tr")
-        NewBookTable.appendChild(TableData)
+        TR = document.createElement("tr")
+        TR.innerHTML = `<td>${Library[i].info()} </td>`
+        BookTable.appendChild(TR)
     }
+    body.appendChild(BookTable)
+};
+BookTable.setAttribute("id","Books")
+createTable(Library)
+function updateTable(Library){
+    
 }
-
-displayTable(Library)
