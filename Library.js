@@ -36,6 +36,32 @@ function displayLibrary(Library){
     TempLibr = Library.map((i) => i.title)
     console.log(TempLibr)
 }
+function createTable(Library){
+    for(i = 0; i < Library.length ; i++){
+        TR = document.createElement("tr")
+        TR.setAttribute("id", i)
+        TR.innerHTML = `<td>${Library[i].title}</td> <td>${Library[i].author}</td> <td>${Library[i].pages}</td>`
+        BookButton = document.createElement("button")
+        BookButton.setAttribute("class", i)
+        BookButton.style.height = '60px';
+        BookButton.style.width = '60px';
+        BookButton.textContent = "Delete Book"
+        BookTable.appendChild(TR)
+        BookTable.appendChild(BookButton)
+        BookTable.setAttribute("id","Books")
+
+    }
+    body.appendChild(BookTable)
+};
+function deleteBook(Library,Book){
+    Bookslist = Library.map((i) => i.title)
+    Index = Bookslist.indexOf(Book)
+    console.log(Bookslist)
+    x = Library.splice(1, Index)
+    console.log(Library,x)
+
+}
+
 const TheLightningThief = new Book("The Lightning Thief","Rick Riordan", 400, true)
 
 const TheCatintheHat = new Book("The Cat in the Hat", "Dr.Suess", 50, false)
@@ -84,22 +110,8 @@ confirmBtn.addEventListener("click", (e)=>{
     
 });
 
-function createTable(Library){
-    for(i = 0; i < Library.length ; i++){
-        TR = document.createElement("tr")
-        TR.setAttribute("id", i)
-        TR.innerHTML = `<td>${Library[i].title}</td> <td>${Library[i].author}</td> <td>${Library[i].pages}</td>`
-        BookButton = document.createElement("button")
-        BookButton.setAttribute("class", i)
-        BookButton.style.height = '60px';
-        BookButton.style.width = '60px';
-        BookButton.textContent = "Delete Book"
-        BookTable.appendChild(TR)
-        BookTable.appendChild(BookButton)
-
-    }
-    body.appendChild(BookTable)
-};
-BookTable.setAttribute("id","Books")
 createTable(Library)
 
+deleteBook(Library,'TheCatintheHat')
+
+/* DeleteBook is an unfinished/broken function*/
