@@ -33,7 +33,7 @@ function addBooktoLibrary(Book){
 
 };
 function displayLibrary(Library){
-    TempLibr = Library.map((i) => i.title)
+    let TempLibr = Library.map((i) => i.title)
     console.log(TempLibr)
 }
 function createTable(Library){
@@ -54,11 +54,14 @@ function createTable(Library){
     body.appendChild(BookTable)
 };
 function deleteBook(Library,Book){
-    Bookslist = Library.map((i) => i.title)
-    Index = Bookslist.indexOf(Book)
-    console.log(Bookslist)
-    x = Library.splice(Index, 1)
-    console.log(Library,x)
+    let Bookslist = Library.map((i) => i.title);
+    let Index = Bookslist.indexOf(Book);
+    console.log(Bookslist);
+    x = Library.splice(Index, 1);
+    console.log(Library,x);
+
+}
+function updateTable(Library){
 
 }
 
@@ -78,38 +81,45 @@ console.log(Library)
 addBooktoLibrary(TheCatintheHat)
 addBooktoLibrary(Fahrenheit451)
 addBooktoLibrary(LordoftheFiles)
-addBooktoLibrary(MobyDick)
-addBooktoLibrary(TheOddessy)
 displayLibrary(Library)
 
 console.log(Library)
 
 DialogButton.addEventListener("click", ()=>{
-    NEWBOOK.showModal()
+    NEWBOOK.showModal();
 });
 
 confirmBtn.addEventListener("click", (e)=>{
     let HREAD;
     let FormedBook;
-    e.preventDefault()
-    console.log(NBAuthor.value)
-    console.log(NBPages.value)
-    console.log(NBTitle.value)
+    e.preventDefault();
+    console.log(NBAuthor.value);
+    console.log(NBPages.value);
+    console.log(NBTitle.value);
     for (i = 0; i < NBhRead.length; i++) {
         if (NBhRead[i].type == 'radio' && NBhRead[i].checked) {
-            HREAD = NBhRead[i].value
+            HREAD = NBhRead[i].value;
         }
     }
     if (HREAD == 'yes'){
-        FormedBook = new Book(NBTitle.value,NBAuthor.value,NBPages.value, true)
+        FormedBook = new Book(NBTitle.value,NBAuthor.value,NBPages.value, true);
     }
     else if (HREAD == 'no'){
-        FormedBook = new Book(NBTitle.value,NBAuthor.value,NBPages.value, false)
+        FormedBook = new Book(NBTitle.value,NBAuthor.value,NBPages.value, false);
     }
-    addBooktoLibrary(FormedBook)
+    let Bookslist = Library.map((i) => i.title);
+    for(i= 0; i<Bookslist.length; i++){
+        if (Bookslist[i] == FormedBook){
+            console.log(Bookslist)
+            console.log("This book is already in Library. Cannot be added")
+        }
+        else{
+            addBooktoLibrary(FormedBook);
+        }
+    } console.log(Library)
     
 });
 
 createTable(Library)
 
-deleteBook(Library,'Moby Dick')
+
