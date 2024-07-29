@@ -57,7 +57,7 @@ function deleteBook(Library,Book){
     Bookslist = Library.map((i) => i.title)
     Index = Bookslist.indexOf(Book)
     console.log(Bookslist)
-    x = Library.splice(1, Index)
+    x = Library.splice(Index, 1)
     console.log(Library,x)
 
 }
@@ -112,6 +112,4 @@ confirmBtn.addEventListener("click", (e)=>{
 
 createTable(Library)
 
-deleteBook(Library,'TheCatintheHat')
-
-/* DeleteBook is an unfinished/broken function*/
+deleteBook(Library,'Moby Dick')
