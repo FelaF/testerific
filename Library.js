@@ -37,15 +37,16 @@ function displayLibrary(Library){
     console.log(TempLibr)
 }
 function createTable(Library){
-    for(i = 0; i < Library.length ; i++){
-        TR = document.createElement("tr")
+    for(i in Library){
+        let TR = document.createElement("tr")
         TR.setAttribute("id", i)
         TR.innerHTML = `<td>${Library[i].title}</td> <td>${Library[i].author}</td> <td>${Library[i].pages}</td>`
-        BookButton = document.createElement("button")
+        let BookButton = document.createElement("button")
         BookButton.setAttribute("class", i)
         BookButton.style.height = '60px';
         BookButton.style.width = '60px';
         BookButton.textContent = "Delete Book"
+        BookButton.addEventListener('click',deleteBookfromLibrary(Library, Library[i].title))
         BookTable.appendChild(TR)
         BookTable.appendChild(BookButton)
         BookTable.setAttribute("id","Books")
@@ -53,17 +54,19 @@ function createTable(Library){
     }
     body.appendChild(BookTable)
 };
-function deleteBook(Library,Book){
+function deleteBookfromLibrary(Library,Book){
     let Bookslist = Library.map((i) => i.title);
     let Index = Bookslist.indexOf(Book);
     console.log(Bookslist);
     x = Library.splice(Index, 1);
     console.log(Library,x);
+    createTable(Library)
 
 }
-function updateTable(Library){
-
+function deleteBookfromTable(Book){
+    
 }
+
 
 const TheLightningThief = new Book("The Lightning Thief","Rick Riordan", 400, true)
 
@@ -122,4 +125,4 @@ confirmBtn.addEventListener("click", (e)=>{
 
 createTable(Library)
 
-
+console.log(TR)
