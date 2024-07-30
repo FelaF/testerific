@@ -69,7 +69,6 @@ function deleteBookfromTable(Book){
 
 
 const TheLightningThief = new Book("The Lightning Thief","Rick Riordan", 400, true)
-
 const TheCatintheHat = new Book("The Cat in the Hat", "Dr.Suess", 50, false)
 const Fahrenheit451 = new Book("Fahrenheit 451", "Ray Bradbury", 176, false)
 const LordoftheFiles = new Book("Lord of the Flies", "William Golding", 336, true)
@@ -84,6 +83,8 @@ console.log(Library)
 addBooktoLibrary(TheCatintheHat)
 addBooktoLibrary(Fahrenheit451)
 addBooktoLibrary(LordoftheFiles)
+addBooktoLibrary(TheLightningThief)
+addBooktoLibrary(TheOddessy)
 displayLibrary(Library)
 
 console.log(Library)
@@ -121,8 +122,7 @@ confirmBtn.addEventListener("click", (e)=>{
         }
     } console.log(Library)
     
+    createTable(Library)
+    
 });
 
-createTable(Library)
-
-console.log(TR)
