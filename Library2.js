@@ -52,7 +52,7 @@ function removeBookfromLibrary(Book){
         Indexed = Library.indexOf(Book.title);
         libraryOBJ.splice(Indexed, 1);
     }
-    console.log(libraryOBJ,Indexed,);
+    console.log(libraryOBJ,Indexed);
 }
 
 function displayLibrary(){
@@ -91,30 +91,42 @@ confirmButton.addEventListener("click", (event)=>{
 
 function tableOfBooks(libraryOBJ){
     let tableOfBooks = document.createElement("table")
-    let tblbody = document.createElement("tbody")
+    let TBLbody = document.createElement("tbody")
+    let Tablerows;
     for(i = 0; i < libraryOBJ.length; i++){
         bookrow = document.createElement("tr")
+        bookrow.setAttribute("class", "book")
+        bookrow.setAttribute("id", i)
             let authorCell = document.createElement("td")
-            let authorCellText = document.createTextNode(`${libraryOBJ[i].author}`)
+            let authorCellText = document.createTextNode(` ${libraryOBJ[i].author}`)
             let pagesCell = document.createElement("td")
-            let pagesCellText = document.createTextNode(`${libraryOBJ[i].pages}`)
+            let pagesCellText = document.createTextNode(` ${libraryOBJ[i].pages} pages`)
             let readCell = document.createElement("td")
             let readCellText = document.createTextNode(`${libraryOBJ[i].read}`)
             let titleCell = document.createElement("td")
-            let titleCellText = document.createTextNode(`${libraryOBJ[i].title}`)
+            let titleCellText = document.createTextNode(` ${libraryOBJ[i].title}`)
             authorCell.appendChild(authorCellText)
             titleCell.appendChild(titleCellText)
             pagesCell.appendChild(pagesCellText)
-            console.log(pagesCellText)
             readCell.appendChild(readCellText)
             bookrow.appendChild(titleCell)
             bookrow.appendChild(authorCell)
             bookrow.appendChild(pagesCell)
             bookrow.appendChild(readCell)
-            tblbody.appendChild(bookrow)
+            TBLbody.appendChild(bookrow)
         };
+        Tablerows = TBLbody.querySelectorAll("tr")
+        Tablerows.forEach((Book)=> {
+            console.log(Book.innerHTML)
+        })
+        console.log(TBLbody.childNodes)
+        for(i = 0; i < TBLbody.childNodes.length; i++){
+            console.log(TBLbody.childNodes[i])
+        }
+        rows = TBLbody.getElementsByClassName("book")
+        console.log(rows.item(0).innerHTML)
 
-    tableOfBooks.appendChild(tblbody);
+    tableOfBooks.appendChild(TBLbody);
     document.body.appendChild(tableOfBooks);
 };
 
@@ -133,6 +145,3 @@ addBooktoLibrary(TheBadBeginning)
 displayLibrary()
 removeBookfromLibrary(TheCatintheHat)
 displayLibrary()
-
-x = libraryOBJ.filter(libraryList)
-console.log(x)
