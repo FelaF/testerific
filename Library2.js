@@ -1,5 +1,6 @@
 let body = document.body
 let libraryOBJ = []
+let Addable = true
 const dialogBox = document.getElementById("NewBook")
 const dialogBoxButton = document.getElementById("NB")
 const bookTitle = dialogBox.querySelector("#Title")
@@ -35,10 +36,13 @@ function Book(title,author,pages,read){
 function addBooktoLibrary(Book){
     let Library = libraryOBJ.map((i) => i.title);
     if((Library.includes(Book.title)) == false){
+        Addable = true
         libraryOBJ.push(Book);
     }
     else if((Library.includes(Book.title) == true)){
+        Addable = false
         console.log("Book is already in Library. cannot re-add")
+        
     }
     console.log(libraryOBJ);
 }
@@ -46,11 +50,13 @@ function addBooktoLibrary(Book){
 function removeBookfromLibrary(Book){
     let Library = libraryOBJ.map((i) => i.title);
     if((Library.includes(Book.title)) == false){
+        Addable = false
         console.log("Book is not in Library... Deleted Nothing");
     }
     else if((Library.includes(Book.title)) == true){
         Indexed = Library.indexOf(Book.title);
         libraryOBJ.splice(Indexed, 1);
+        Addable = true
     }
     console.log(libraryOBJ,Indexed);
 }
@@ -82,10 +88,11 @@ confirmButton.addEventListener("click", (event)=>{
         newDialogBook = new Book(bookTitle.value, bookAuthor.value, bookPages.value, false);
     }
     console.log(bookTitle.value, bookAuthor.value, bookPages.value, read)
-    addBooktoLibrary(newDialogBook)
     displayLibrary()
-    tableOfBooks(libraryOBJ)
-
+    if(Addable){
+        addBooktoLibrary(newDialogBook)
+        tableOfBooks(libraryOBJ)
+    }
 
 })
 
@@ -93,6 +100,10 @@ function tableOfBooks(libraryOBJ){
     let tableOfBooks = document.createElement("table")
     let TBLbody = document.createElement("tbody")
     let Tablerows;
+    let currentTable = document.querySelector('table')
+    if (currentTable){
+        body.removeChild(currentTable)
+    }
     for(i = 0; i < libraryOBJ.length; i++){
         bookrow = document.createElement("tr")
         bookrow.setAttribute("class", "book")
@@ -102,9 +113,23 @@ function tableOfBooks(libraryOBJ){
             let pagesCell = document.createElement("td")
             let pagesCellText = document.createTextNode(` ${libraryOBJ[i].pages} pages`)
             let readCell = document.createElement("td")
-            let readCellText = document.createTextNode(`${libraryOBJ[i].read}`)
+            
+            function readvariable(read){
+                if(libraryOBJ[i].read == true){
+                    return "read";
+                }else if(libraryOBJ[i].read == false)
+                    return "not read"
+                }
+
+            let readCellText = document.createTextNode(`${readvariable()}`)
             let titleCell = document.createElement("td")
             let titleCellText = document.createTextNode(` ${libraryOBJ[i].title}`)
+            let deleteBookButton = document.createElement("button")
+            deleteBookButton.setAttribute("class", "Deleter")
+            deleteBookButton.setAttribute("id", i)
+            deleteBookButton.style.height = '35px';
+            deleteBookButton.style.width = '60px';
+            deleteBookButton.textContent = "Delete"
             authorCell.appendChild(authorCellText)
             titleCell.appendChild(titleCellText)
             pagesCell.appendChild(pagesCellText)
@@ -113,21 +138,18 @@ function tableOfBooks(libraryOBJ){
             bookrow.appendChild(authorCell)
             bookrow.appendChild(pagesCell)
             bookrow.appendChild(readCell)
+            bookrow.appendChild(deleteBookButton)
             TBLbody.appendChild(bookrow)
         };
-        Tablerows = TBLbody.querySelectorAll("tr")
-        Tablerows.forEach((Book)=> {
-            console.log(Book.innerHTML)
+        deleters = document.getElementsByClassName("Deleter")
+        deleters.forEach((button)=> {
+            button.addEventListener("click", ()=> {
+                removeBookfromLibrary()
+            })
         })
-        console.log(TBLbody.childNodes)
-        for(i = 0; i < TBLbody.childNodes.length; i++){
-            console.log(TBLbody.childNodes[i])
-        }
-        rows = TBLbody.getElementsByClassName("book")
-        console.log(rows.item(0).innerHTML)
-
     tableOfBooks.appendChild(TBLbody);
     document.body.appendChild(tableOfBooks);
+
 };
 
 function libraryList(Book){
