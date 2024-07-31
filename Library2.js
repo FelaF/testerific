@@ -34,7 +34,7 @@ function Book(title,author,pages,read){
 
 function addBooktoLibrary(Book){
     let Library = libraryOBJ.map((i) => i.title);
-    if((Library.includes(Book.title) == false)){
+    if((Library.includes(Book.title)) == false){
         libraryOBJ.push(Book);
     }
     else if((Library.includes(Book.title) == true)){
@@ -45,14 +45,14 @@ function addBooktoLibrary(Book){
 
 function removeBookfromLibrary(Book){
     let Library = libraryOBJ.map((i) => i.title);
-    if((Library.includes(Book.title) == false)){
+    if((Library.includes(Book.title)) == false){
         console.log("Book is not in Library... Deleted Nothing");
     }
-    else if(Library.includes(Book.title)){
-        Indexed = Library.indexOf(Book);
+    else if((Library.includes(Book.title)) == true){
+        Indexed = Library.indexOf(Book.title);
         libraryOBJ.splice(Indexed, 1);
     }
-    console.log(libraryOBJ);
+    console.log(libraryOBJ,Indexed,);
 }
 
 function displayLibrary(){
@@ -84,24 +84,24 @@ confirmButton.addEventListener("click", (event)=>{
     console.log(bookTitle.value, bookAuthor.value, bookPages.value, read)
     addBooktoLibrary(newDialogBook)
     displayLibrary()
-    tableOfBooks()
+    tableOfBooks(libraryOBJ)
 
 
 })
 
-function tableOfBooks(){
+function tableOfBooks(libraryOBJ){
     let tableOfBooks = document.createElement("table")
     let tblbody = document.createElement("tbody")
-    libraryOBJ.forEach((newBook) => {
+    for(i = 0; i < libraryOBJ.length; i++){
         bookrow = document.createElement("tr")
             let authorCell = document.createElement("td")
-            let authorCellText = document.createTextNode(`${newBook.author}`)
+            let authorCellText = document.createTextNode(`${libraryOBJ[i].author}`)
             let pagesCell = document.createElement("td")
-            let pagesCellText = document.createTextNode(`${newBook.pages}`)
+            let pagesCellText = document.createTextNode(`${libraryOBJ[i].pages}`)
             let readCell = document.createElement("td")
-            let readCellText = document.createTextNode(`${newBook.read}`)
+            let readCellText = document.createTextNode(`${libraryOBJ[i].read}`)
             let titleCell = document.createElement("td")
-            let titleCellText = document.createTextNode(`${newBook.title}`)
+            let titleCellText = document.createTextNode(`${libraryOBJ[i].title}`)
             authorCell.appendChild(authorCellText)
             titleCell.appendChild(titleCellText)
             pagesCell.appendChild(pagesCellText)
@@ -112,20 +112,27 @@ function tableOfBooks(){
             bookrow.appendChild(pagesCell)
             bookrow.appendChild(readCell)
             tblbody.appendChild(bookrow)
-        })
+        };
 
     tableOfBooks.appendChild(tblbody);
     document.body.appendChild(tableOfBooks);
 };
 
+function libraryList(Book){
+    Library = libraryOBJ.map((i)=> i.title)
+    return Library.includes(Book.title)
+}
 
-addBooktoLibrary(TheBadBeginning)
-addBooktoLibrary(MobyDick)
-removeBookfromLibrary(MobyDick)
-addBooktoLibrary(TheCatintheHat)
-addBooktoLibrary(TheLightningThief)
 addBooktoLibrary(LordoftheFiles)
-removeBookfromLibrary(TheLightningThief)
+addBooktoLibrary(TheCatintheHat)
+removeBookfromLibrary(LordoftheFiles)
 displayLibrary()
-console.log(MobyDick.pages)
-tableOfBooks()
+addBooktoLibrary(LordoftheFiles)
+addBooktoLibrary(TheCatintheHat)
+addBooktoLibrary(TheBadBeginning)
+displayLibrary()
+removeBookfromLibrary(TheCatintheHat)
+displayLibrary()
+
+x = libraryOBJ.filter(libraryList)
+console.log(x)
