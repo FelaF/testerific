@@ -91,18 +91,29 @@ confirmButton.addEventListener("click", (event)=>{
 function tableOfBooks(){
     let tableOfBooks = document.createElement("table")
     let tblbody = document.createElement("tbody")
-    for (i in libraryOBJ){
-        const row = document.createElement("tr")
-        for (j in libraryOBJ){
-            const cell = document.createElement("td")
-            const celltext = document.createTextNode(`${libraryOBJ[j].title}`)
-            cell.appendChild(celltext)
-            row.appendChild(cell)
-        }
-        tblbody.appendChild(row)
-    }
-    tableOfBooks.appendChild(tblbody)
-    document.body.appendChild(tableOfBooks)
+    libraryOBJ.forEach((newBook) => {
+        bookrow = document.createElement("tr")
+            let authorCell = document.createElement("td")
+            let authorCellText = document.createTextNode(`${newBook.author}`)
+            let pagesCell = document.createElement("td")
+            let pagesCellText = document.createTextNode(`${newBook.pages}`)
+            let readCell = document.createElement("td")
+            let readCellText = document.createTextNode(`${newBook.read}`)
+            let titleCell = document.createElement("td")
+            let titleCellText = document.createTextNode(`${newBook.title}`)
+            authorCell.appendChild(authorCellText)
+            titleCell.appendChild(titleCellText)
+            pagesCell.appendChild(pagesCellText)
+            readCell.appendChild(readCellText)
+            bookrow.appendChild(titleCell)
+            bookrow.appendChild(authorCell)
+            bookrow.appendChild(pagesCell)
+            bookrow.appendChild(readCell)
+            tblbody.appendChild(bookrow)
+        })
+
+    tableOfBooks.appendChild(tblbody);
+    document.body.appendChild(tableOfBooks);
 };
 
 
