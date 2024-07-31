@@ -20,7 +20,7 @@ const TheBadBeginning = new Book("The Bad Beginning", "Lemony Snicket", 162, tru
 function Book(title,author,pages,read){
     this.title = title
     this.author = author
-    this,pages = pages
+    this.pages = pages
     this.read = read
     this.info = function(){
         if(read == true){
@@ -84,6 +84,7 @@ confirmButton.addEventListener("click", (event)=>{
     console.log(bookTitle.value, bookAuthor.value, bookPages.value, read)
     addBooktoLibrary(newDialogBook)
     displayLibrary()
+    tableOfBooks()
 
 
 })
@@ -104,6 +105,7 @@ function tableOfBooks(){
             authorCell.appendChild(authorCellText)
             titleCell.appendChild(titleCellText)
             pagesCell.appendChild(pagesCellText)
+            console.log(pagesCellText)
             readCell.appendChild(readCellText)
             bookrow.appendChild(titleCell)
             bookrow.appendChild(authorCell)
@@ -125,4 +127,5 @@ addBooktoLibrary(TheLightningThief)
 addBooktoLibrary(LordoftheFiles)
 removeBookfromLibrary(TheLightningThief)
 displayLibrary()
+console.log(MobyDick.pages)
 tableOfBooks()
