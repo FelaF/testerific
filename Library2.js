@@ -89,23 +89,23 @@ confirmButton.addEventListener("click", (event)=>{
 })
 
 function tableOfBooks(){
-    const tableOfBooks = document.createElement("Table")
-    for (i=0; i < libraryOBJ; i++){
-        let TR = document.createElement("tr")
-        TR.setAttribute("id", i)
-        let EachTR = document.getElementById("i")
-        let deleteBookButton = document.createElement("button")
-        deleteBookButton.setAttribute("class", i)
-        deleteBookButton.style.width = '60px'
-        deleteBookButton.style.height = '36px'
-        EachTR.innerHTML =`<td>Book</td><td>${i.author}</td><td>${i.author}</td><td>${i.pages}</td><td>${i.read}</td><td>${deleteBookButton}</td>`
-        tableOfBooks.appendChild(TR)
+    let tableOfBooks = document.createElement("table")
+    let tblbody = document.createElement("tbody")
+    for (i in libraryOBJ){
+        const row = document.createElement("tr")
+        for (j in libraryOBJ){
+            const cell = document.createElement("td")
+            const celltext = document.createTextNode(`${libraryOBJ[j].title}`)
+            cell.appendChild(celltext)
+            row.appendChild(cell)
+        }
+        tblbody.appendChild(row)
     }
-    body.appendChild(tableOfBooks)
+    tableOfBooks.appendChild(tblbody)
+    document.body.appendChild(tableOfBooks)
 };
-function tableOfBookies(){
-    
-}
+
+
 addBooktoLibrary(TheBadBeginning)
 addBooktoLibrary(MobyDick)
 removeBookfromLibrary(MobyDick)
