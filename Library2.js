@@ -1,6 +1,5 @@
 let body = document.body
 let libraryOBJ = []
-let Addable = true
 const dialogBox = document.getElementById("NewBook")
 const dialogBoxButton = document.getElementById("NB")
 const bookTitle = dialogBox.querySelector("#Title")
@@ -23,6 +22,7 @@ function Book(title,author,pages,read){
     this.author = author
     this.pages = pages
     this.read = read
+    this.addable = true
     this.info = function(){
         if(read == true){
             return this.title + " by " + this.author + " has " + this.pages + "and has been read";
@@ -36,13 +36,11 @@ function Book(title,author,pages,read){
 function addBooktoLibrary(Book){
     let Library = libraryOBJ.map((i) => i.title);
     if((Library.includes(Book.title)) == false){
-        Addable = false
+        Book.addable = false
         libraryOBJ.push(Book);
     }
     else if((Library.includes(Book.title) == true)){
-        Addable = true
         console.log("Book is already in Library. cannot re-add")
-        
     }
     console.log(libraryOBJ);
 }
@@ -50,13 +48,12 @@ function addBooktoLibrary(Book){
 function removeBookfromLibrary(Book){
     let Library = libraryOBJ.map((i) => i.title);
     if((Library.includes(Book.title)) == false){
-        Addable = false
         console.log("Book is not in Library... Deleted Nothing");
     }
     else if((Library.includes(Book.title)) == true){
         Indexed = Library.indexOf(Book.title);
         libraryOBJ.splice(Indexed, 1);
-        Addable = true
+        Book.addable = true
     }
     console.log(libraryOBJ,Indexed);
 }
@@ -89,7 +86,7 @@ confirmButton.addEventListener("click", (event)=>{
     }
     console.log(bookTitle.value, bookAuthor.value, bookPages.value, read)
     displayLibrary()
-    if(Addable){
+    if(newDialogBook.addable){
         addBooktoLibrary(newDialogBook)
         tableOfBooks(libraryOBJ)
     }
