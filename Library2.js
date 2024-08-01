@@ -145,13 +145,11 @@ function tableOfBooks(libraryOBJ){
     console.log(deleters)
     Array.from(deleters).forEach((button) => {
         button.addEventListener("click", () => {
-            Tablerows = Array.from(TBLbody)
-            for(let i of Tablerows){
-                Tablerows[i]
-            }
+            removeBookfromLibrary(((libraryOBJ[button.id])))
             console.log(button.id)
         })
     });
+    
     tableOfBooks.appendChild(TBLbody);
     document.body.appendChild(tableOfBooks);
 
