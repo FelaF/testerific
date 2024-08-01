@@ -141,13 +141,13 @@ function tableOfBooks(libraryOBJ){
             bookrow.appendChild(deleteBookButton)
             TBLbody.appendChild(bookrow)
         };
-        const deleters = TBLbody.getElementsByClassName("Deleter")
-        console.log(deleters)
-        deleters.forEach((button) => {
-            button.addEventListener("click", ()=> {
-                console.log(button.id);
-            })
+    const deleters = TBLbody.getElementsByClassName("Deleter")
+    console.log(deleters)
+    Array.from(deleters).forEach((button) => {
+        button.addEventListener("click", () => {
+           
         })
+    });
     tableOfBooks.appendChild(TBLbody);
     document.body.appendChild(tableOfBooks);
 
