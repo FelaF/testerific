@@ -36,11 +36,11 @@ function Book(title,author,pages,read){
 function addBooktoLibrary(Book){
     let Library = libraryOBJ.map((i) => i.title);
     if((Library.includes(Book.title)) == false){
-        Addable = true
+        Addable = false
         libraryOBJ.push(Book);
     }
     else if((Library.includes(Book.title) == true)){
-        Addable = false
+        Addable = true
         console.log("Book is already in Library. cannot re-add")
         
     }
@@ -146,6 +146,7 @@ function tableOfBooks(libraryOBJ){
     Array.from(deleters).forEach((button) => {
         button.addEventListener("click", () => {
             removeBookfromLibrary(((libraryOBJ[button.id])))
+            displayLibrary()
             console.log(button.id)
         })
     });
